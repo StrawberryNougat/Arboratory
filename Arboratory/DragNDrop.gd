@@ -103,7 +103,7 @@ The watered function starts the growth process by sending a signal to Merge Area
 func _on_water_area_shape_entered(area_id, area, area_shape, self_shape):
 	var isPot = area.get_name()
 	if isPot == "Pot":
-		position = Vector2(1400,200)
+		position = Vector2(1400,150)
 		emit_signal("watered")
 		is_dragging = false
 	
@@ -134,6 +134,7 @@ It will also add the sapling to the inventory and unlock the type in the dex.
 func changeSeed(which):
 	var seedData = ImportData.seed_data
 	if time_to_merge == false:
+		get_tree().get_root().find_node("Merge Sound Effect",true,false).play()
 		for key in seedData:
 			if seedData[key]["seedImage"] == which.get_node("SeedImage").texture:
 				which.get_node("SeedImage").texture = load(seedData[key]["saplingImage"])

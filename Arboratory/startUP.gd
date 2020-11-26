@@ -8,6 +8,7 @@ into the game.
 #Currently just chaning one of the seeds to the lavender seed
 #Planned to be the start up / save feature of the game
 func _ready():
+	get_tree().get_root().find_node("Main Game Track",true,false).play()
 #	$arboretumBackground.show()
 #	$labBackground.hide()
 #	$Pot.hide()
@@ -22,7 +23,7 @@ func _ready():
 	_new_seed("water",1)
 	_new_seed("earth",1)
 	_new_seed("fire",1)
-	get_tree().call_group("seedGroup","hide")
+	get_tree().call_group("seedGroup","show")
 	pass 
 
 """
@@ -169,28 +170,32 @@ pausing (sort of) the rest of the game and unpausing the farm.
 Shows the Farm and Inventory and hides the rest.
 """
 func _on_FarmButton_pressed():
-	$BaseFarmGrid._unpause()
-	$BaseFarmGrid/Inventory/TextureRect.show()
-	$BaseFarmGrid/Inventory/GridContainer.show()
-	$BaseFarmGrid/Farm.show()
-	$BaseFarmGrid/PlantingNotifier/ClearPlots.show()
-	$BaseFarmGrid/PlantingNotifier/ExitFarm.show()
-	$BaseFarmGrid/PlantingNotifier/PlantingNotifierMessage.show()
-	$BaseFarmGrid/PlantingNotifier/ProgressBar.show()
-	$labBackground.hide()
-	$arboretumBackground.show()
-	#$BaseFarmGrid/PlantingNotifier/treeDex_button2.show()
-	$Pot.hide()
-	$water.hide()
-	$treeDex_button.hide()
-	$FarmButton.hide()
-	$PauseButton.hide()
-	$Seeds/mergeBackground1.hide()
-	$Seeds/mergeBackground2.hide()
-	
-	get_tree().call_group("seedGroup","hide")
-	get_tree().call_group("mergeGroup","hide")
-	#get_tree().call_group("soilPlots","show")
+	if get_node("DialogueBox/Control/RichTextLabel").visible == true:
+		pass
+	else:
+		#yield(get_tree().create_timer(.4),"timeout")
+		$BaseFarmGrid._unpause()
+		$BaseFarmGrid/Inventory/TextureRect.show()
+		$BaseFarmGrid/Inventory/GridContainer.show()
+		$BaseFarmGrid/Farm.show()
+		$BaseFarmGrid/PlantingNotifier/ClearPlots.show()
+		$BaseFarmGrid/PlantingNotifier/ExitFarm.show()
+		$BaseFarmGrid/PlantingNotifier/PlantingNotifierMessage.show()
+		$BaseFarmGrid/PlantingNotifier/ProgressBar.show()
+		$labBackground.hide()
+		$arboretumBackground.show()
+		#$BaseFarmGrid/PlantingNotifier/treeDex_button2.show()
+		$Pot.hide()
+		$water.hide()
+		$treeDex_button.hide()
+		$FarmButton.hide()
+		$PauseButton.hide()
+		$Seeds/mergeBackground1.hide()
+		$Seeds/mergeBackground2.hide()
+			
+		get_tree().call_group("seedGroup","hide")
+		get_tree().call_group("mergeGroup","hide")
+		#get_tree().call_group("soilPlots","show")
 	
 """
 Returns to the merge area from the BaseFarmGrid when the return button is pressed,

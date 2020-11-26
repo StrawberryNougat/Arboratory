@@ -195,6 +195,7 @@ func _plant_tree(pos_x,pos_y,plot_x,plot_y):
 			
 	elif $Farm.planting_ready == true:
 		print("new tree incoming")
+		get_tree().get_root().find_node("Planting Sound Effect", true, false).play()
 		var tree = Tree.instance()
 		add_child(tree)
 		trees[plot_x][plot_y] = tree
@@ -332,11 +333,13 @@ func _new_farm():
 				else:
 					$Inventory._add_to_inventory("seed",trees[x][y].treeName)
 					
+	get_tree().get_root().find_node("Harvesting Sound Effect",true,false).play()
 	$Farm._clear_plots()
 	
 #clears a single plot
 func _new_plot():
 	if ready_to_clear_plot == true:
+		get_tree().get_root().find_node("Harvesting Sound Effect",true,false).play()
 		$Farm._clear_single_plot()
 	else:
 		free_tree = true

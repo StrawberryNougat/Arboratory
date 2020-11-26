@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://RichTextLabel.gd" type="Script" id=1]
 [ext_resource path="res://Button.gd" type="Script" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://Fonts/Itim-Regular.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://Assets/Art/yoon.png" type="Texture" id=16]
 [ext_resource path="res://Sprite3.gd" type="Script" id=17]
+[ext_resource path="res://Assets/Sounds/Dialogue.wav" type="AudioStream" id=18]
+[ext_resource path="res://Assets/Art/stronk.png" type="Texture" id=19]
+[ext_resource path="res://Sprite4.gd" type="Script" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -64,6 +67,11 @@ position = Vector2( 0, -495 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 16 )
 script = ExtResource( 17 )
+
+[node name="Sprite4" type="Sprite" parent="Control"]
+position = Vector2( 0, -495 )
+texture = ExtResource( 19 )
+script = ExtResource( 20 )
 
 [node name="Box" type="Sprite" parent="Control"]
 texture = ExtResource( 13 )
@@ -175,18 +183,24 @@ script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Dialogue Sound Effect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -13.938
 [connection signal="hideBox" from="Control/RichTextLabel" to="Control/Box" method="_on_RichTextLabel_hideBox"]
 [connection signal="hideButtons" from="Control/RichTextLabel" to="Control/Button" method="_on_RichTextLabel_hideButtons"]
 [connection signal="hideButtons" from="Control/RichTextLabel" to="Control/Button2" method="_on_RichTextLabel_hideButtons"]
 [connection signal="hideSprite" from="Control/RichTextLabel" to="Control/Sprite" method="_on_RichTextLabel_hideSprite"]
 [connection signal="hideSprite2" from="Control/RichTextLabel" to="Control/Sprite2" method="_on_RichTextLabel_hideSprite2"]
 [connection signal="hideSprite3" from="Control/RichTextLabel" to="Control/Sprite3" method="_on_RichTextLabel_hideSprite3"]
+[connection signal="hideSprite4" from="Control/RichTextLabel" to="Control/Sprite4" method="_on_RichTextLabel_hideSprite4"]
 [connection signal="releaseTheButtons" from="Control/RichTextLabel" to="Control/Button" method="_on_RichTextLabel_releaseTheButtons"]
 [connection signal="releaseTheButtons" from="Control/RichTextLabel" to="Control/Button2" method="_on_RichTextLabel_releaseTheButtons"]
 [connection signal="showBox" from="Control/RichTextLabel" to="Control/Box" method="_on_RichTextLabel_showBox"]
 [connection signal="showSprite" from="Control/RichTextLabel" to="Control/Sprite" method="_on_RichTextLabel_showSprite"]
 [connection signal="showSprite2" from="Control/RichTextLabel" to="Control/Sprite2" method="_on_RichTextLabel_showSprite2"]
 [connection signal="showSprite3" from="Control/RichTextLabel" to="Control/Sprite3" method="_on_RichTextLabel_showSprite3"]
+[connection signal="showSprite4" from="Control/RichTextLabel" to="Control/Sprite4" method="_on_RichTextLabel_showSprite4"]
 [connection signal="timeout" from="Control/Timer" to="Control/RichTextLabel" method="_on_Timer_timeout"]
 [connection signal="pressed" from="Control/Button" to="Control/RichTextLabel" method="_on_Button_pressed"]
 [connection signal="button_up" from="Control/Button2" to="Control/Button2" method="_on_Button2_button_up"]

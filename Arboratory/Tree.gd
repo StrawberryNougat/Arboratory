@@ -30,6 +30,8 @@ var time_until_grown
 var time_planted
 var tree_maturity = "Sapling"
 var special_property
+var initial_pause_time = PauseMenu.pauseTime
+
 
 """
 Variables relating to death
@@ -39,6 +41,7 @@ var dead = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$debugTimer.start()
 	var dynamic_font = DynamicFont.new()
 	dynamic_font.font_data = load("res://Fonts/Lato-Regular.ttf")
 	dynamic_font.size = 20
@@ -132,7 +135,8 @@ Checks to see if enough time has passed for the tree to grow.
 If enough time has passed, changes the texture of the tree.
 """
 func check_growth_status():
-	if (OS.get_unix_time() - time_planted - int(PauseMenu.pauseTime) >= time_until_grown):
+	
+	if (OS.get_unix_time() - time_planted - int(PauseMenu.pauseTime - initial_pause_time) >= time_until_grown):
 		tree_maturity = "Mature"
 		$AnimatedSprite.set_frame(1)
 		
@@ -279,3 +283,17 @@ func _special_power():
 			for y in range(tree_y_index-1, tree_y_index + 2):
 				#print("x: " + str(x) + "y: " + str(y))
 				emit_signal("_water_tree_from_tree", x, y)
+				
+
+
+
+func _on_debugTimer_timeout():
+	if (tree_maturity != "Mature"):
+		print("unix time: " + str(OS.get_unix_time()))
+		print("time planted: " + str(time_planted))
+		print("time until grown: " + str(time_until_grown))
+		print("pause time: " + str(PauseMenu.pauseTime))
+		print("subtracted pause time: " + str(PauseMenu.pauseTime - initial_pause_time))
+		print("time remaining: " + str(OS.get_unix_time() - time_planted - int(PauseMenu.pauseTime - initial_pause_time)))
+	
+	

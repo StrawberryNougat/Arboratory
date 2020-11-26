@@ -1,6 +1,6 @@
 extends Node
 
-export (int) var level = 1
+export (int) var level = 5
 
 var experience = 0
 var required_experience = get_next_level_xp(level)
@@ -24,6 +24,7 @@ func gain_level():
 	level += 1
 	required_experience = get_next_level_xp(level)
 	if level == 3:
+		
 		get_tree().get_root().find_node("Planting",true,false)._new_merge_item("carrot")
 		get_tree().get_root().find_node("Planting",true,false)._new_merge_item("unidentified_grass")
 		get_tree().get_root().find_node("Planting",true,false)._new_merge_item("candy")
@@ -31,18 +32,22 @@ func gain_level():
 		get_tree().get_root().find_node("Planting",true,false)._new_merge_item("rock")
 		for member in get_tree().get_nodes_in_group("seedGroup"):
 			member.set_position(member.seed_pos)
+		get_tree().get_root().find_node("BaseFarmGrid",true,false)._exit_farm()
 		get_tree().get_root().find_node("RichTextLabel",true,false).dialogue_index = 0
 		get_tree().get_root().find_node("RichTextLabel",true,false)._ready()
 	if level == 5:
 		for member in get_tree().get_nodes_in_group("seedGroup"):
 			member.set_position(member.seed_pos)
+		get_tree().get_root().find_node("BaseFarmGrid",true,false)._exit_farm()
 		get_tree().get_root().find_node("RichTextLabel",true,false).dialogue_index = 0
 		get_tree().get_root().find_node("RichTextLabel",true,false)._ready()
 
 #returns the xp needed to get to the next level
 func get_next_level_xp(level_num):
-	return 30 * level_num
-	#return 10 * level_num
+
+	#return 30 * level_num
+	return 21 * level_num
+
 	
 	
 #getters

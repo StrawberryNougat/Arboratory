@@ -250,4 +250,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="debugTimer" type="Timer" parent="."]
 [connection signal="timeout" from="healthDeduction" to="." method="_on_healthDeduction_timeout"]
+[connection signal="timeout" from="debugTimer" to="." method="_on_debugTimer_timeout"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Harvesting.wav-c5847c9b3325cfd1322bcde0f019f50e.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Harvesting.wav"
+dest_files=[ "res://.import/Harvesting.wav-c5847c9b3325cfd1322bcde0f019f50e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

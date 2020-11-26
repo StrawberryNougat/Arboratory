@@ -6,6 +6,8 @@ onready var seedData = ImportData.seed_data #Imports the Seed Data Database
 onready var Water = get_tree().get_root().find_node("water", true, false) #Imports the water node from planting to here
 var key = 0 #Creates the key variable and sets it to 1
 var tempKey #Creates a temporary key used in the next and back buttons
+var count = 0
+signal win
 
 func _ready():
 	#load_tree() # Runs tree function for start
@@ -13,8 +15,13 @@ func _ready():
 	add_items() #Adds the options to the dropdown menu on ready.
 	disable_items() #Calls the disable function
 	#dropdown.set_item_disabled(0,false)
+	$tree_id.text = str(0)
+	$Tree_Art.texture = load(seedData[str(0)]["saplingImage"])
+	$tree_name.text = seedData[str(0)]["treeName"]
+	$tree_description.text = seedData[str(0)]["Description"]
 	dropdown.set_item_text(0, "Choose your Tree") #Changes the Template Text to something else
 	Water.connect("unlocked",self,"unlock") #Connects the unlocked signal from water to the unlock function
+	count = 0
 
 # Function to add items into the dropdown menu
 func add_items():
@@ -29,8 +36,14 @@ func disable_items():
 #Unlocks the tree once it is planted
 func unlock(id):
 	print ("Signal Recieved")
-	dropdown.set_item_disabled(int(id), false)
-	Leveling.gain_xp(5)
+	if dropdown.is_item_disabled(int(id)):
+		dropdown.set_item_disabled(int(id), false)
+		count+=1
+		if count == 15:
+			print("win")
+			emit_signal("win")
+			
+		Leveling.gain_xp(5)
 
 #Changes the Dex to represent the item selected
 func on_item_selected(id):
